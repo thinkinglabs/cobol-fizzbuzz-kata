@@ -35,7 +35,7 @@ $(TARGET)/ZUTZCPC: $(TESTSRC)/ZUTZCPC.CBL
 	cobc -x -std=ibm -o $(TARGET)/ZUTZCPC $(TESTSRC)/ZUTZCPC.CBL
 
 test: $(TARGET) $(TARGET)/ZUTZCPC
-	rm $(TESTPRG)
 	$(TARGET)/ZUTZCPC
-	cobc -x -std=ibm -o $(TARGET)/$(TESTNAME) $(TESTPRG)
-	$(TARGET)/$(TESTNAME)
+	cobc -x -std=ibm -o $(TARGET)/$(UNITTESTS) $(TESTPRG)
+	$(TARGET)/$(UNITTESTS)
+
