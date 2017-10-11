@@ -4,8 +4,8 @@
 
        DATA DIVISION.
        WORKING-STORAGE SECTION.
-       01  LS-INPUT               PIC 9(4).
-       01  LS-RESULT              PIC 9(4).
+       01  LS-INPUT               PIC 9(2).
+       01  LS-RESULT              PIC X.
 
        PROCEDURE DIVISION.
 
@@ -13,3 +13,4 @@
            PERFORM 1000-FIZZBUZZ. 
        
        1000-FIZZBUZZ.
+           MOVE '1' TO LS-RESULT.
