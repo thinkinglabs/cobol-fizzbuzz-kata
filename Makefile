@@ -1,16 +1,17 @@
 
-export PROJECT=$(CURDIR)
-export MAINSRC=$(PROJECT)/src/main/cobol
-export TESTSRC=$(PROJECT)/src/test/cobol
-export MAINCPY=$(MAINSRC)
-export TESTCPY=$(TESTSRC)
-export MAINRSC=$(PROJECT)/src/main/resources
-export TESTRSC=$(PROJECT)/src/test/resources
-export TARGET=$(PROJECT)/target
+PROJECT=$(CURDIR)
+MAINSRC=$(PROJECT)/src/main/cobol
+TESTSRC=$(PROJECT)/src/test/cobol
+MAINCPY=$(MAINSRC)
+TESTCPY=$(TESTSRC)
+MAINRSC=$(PROJECT)/src/main/resources
+TESTRSC=$(PROJECT)/src/test/resources
+TARGET=$(PROJECT)/target
 export COBCPY=$(MAINCPY):$(TESTCPY)
 export COB_LIBRARY_PATH=$(TARGET)
 
-$(info PROJECT $(PROJECT) )
+TESTNAME=TESTPRG
+TESTPRG=$(TARGET)/$(TESTNAME).CBL
 
 PROGRAM=FIZZBUZZ
 CONFIG=FIZZBUZZC
@@ -22,16 +23,18 @@ export TESTNAME=TESTPRG
 export UTSTCFG=$(TESTRSC)/$(CONFIG)
 export UTESTS=$(TESTCPY)/$(UNITTESTS).CBL
 
-$(info SRCPRG=$(SRCPRG) )
-$(info TESTPRG=$(TESTPRG) )
-$(info TESTNAME=$(TESTNAME) )
-$(info UTSTCFG=$(UTSTCFG) )
-$(info UTESTS=$(UTESTS) )
-$(info COBCPY=$(COBCPY) )
-$(info COB_LIBRARY_PATH=$(COB_LIBRARY_PATH) )
+all: clean test
 
-test:
-	cobc -x -o $(TARGET)/ZUTZCPC $(TESTSRC)/ZUTZCPC.CBL
+clean:
+	rm -rf $(TARGET)
+
+$(TARGET):
+	mkdir $(TARGET)
+
+$(TARGET)/ZUTZCPC: $(TESTSRC)/ZUTZCPC.CBL
+	cobc -x -std=ibm -o $(TARGET)/ZUTZCPC $(TESTSRC)/ZUTZCPC.CBL
+
+test: $(TARGET) $(TARGET)/ZUTZCPC
 	$(TARGET)/ZUTZCPC
-	cobc -x -o $(TARGET)/$(TESTNAME) $(TESTPRG)
+	cobc -x -std=ibm -o $(TARGET)/$(TESTNAME) $(TESTPRG)
 	$(TARGET)/$(TESTNAME)
