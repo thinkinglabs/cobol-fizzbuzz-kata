@@ -5,7 +5,9 @@
        DATA DIVISION.
        WORKING-STORAGE SECTION.
        01  LS-INPUT               PIC 9(2).
-       01  LS-RESULT              PIC X.
+       01  LS-RESULT              PIC X(8).
+       01  LS-REMAINDER           PIC 9(2).
+       01  LS-DIVISION-RES        PIC 9(2).
 
        PROCEDURE DIVISION.
 
@@ -13,4 +15,10 @@
            PERFORM 1000-FIZZBUZZ. 
        
        1000-FIZZBUZZ.
-           MOVE '1' TO LS-RESULT.
+           DIVIDE LS-INPUT BY 3 GIVING LS-DIVISION-RES 
+           REMAINDER LS-REMAINDER.
+           IF LS-REMAINDER EQUAL 0 THEN
+           MOVE 'Fizz' TO LS-RESULT
+           ELSE
+           MOVE LS-INPUT TO LS-RESULT.
+
