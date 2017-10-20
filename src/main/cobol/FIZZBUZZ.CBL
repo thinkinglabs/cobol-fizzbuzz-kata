@@ -20,5 +20,10 @@
            IF LS-REMAINDER EQUAL 0 THEN
            MOVE 'Fizz' TO LS-RESULT
            ELSE
+           DIVIDE LS-INPUT BY 5 GIVING LS-DIVISION-RES
+           REMAINDER LS-REMAINDER.
+           IF LS-REMAINDER EQUAL 0 THEN
+           MOVE 'Buzz' TO LS-RESULT
+           ELSE
            MOVE LS-INPUT TO LS-RESULT.
 

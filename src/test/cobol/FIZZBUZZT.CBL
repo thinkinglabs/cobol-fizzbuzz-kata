@@ -15,4 +15,8 @@
            PERFORM 1000-FIZZBUZZ
            EXPECT LS-RESULT TO BE 'Fizz'
 
+           TESTCASE 'it returns Buzz when input is 5'
+           MOVE 5 TO LS-INPUT
+           PERFORM 1000-FIZZBUZZ
+           EXPECT LS-RESULT TO BE 'Buzz'
 
