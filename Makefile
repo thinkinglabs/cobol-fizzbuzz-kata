@@ -39,3 +39,7 @@ test: $(TARGET) $(TARGET)/ZUTZCPC
 	cobc -x -std=ibm -o $(TARGET)/$(UNITTESTS) $(TESTPRG)
 	$(TARGET)/$(UNITTESTS)
 
+$(TARGET)/$(PROGRAM): $(MAINSRC)/$(PROGRAM).CBL
+	cobc -x -std=ibm -o $(TARGET)/$(PROGRAM) $(MAINSRC)/$(PROGRAM).CBL
+
+compile: $(TARGET) $(TARGET)/$(PROGRAM)
